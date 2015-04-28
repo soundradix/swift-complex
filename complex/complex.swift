@@ -9,6 +9,7 @@
 import Foundation
 // protocol RealType : FloatingPointType // sadly crashes as of Swift 1.1 :-(
 public protocol RealType {
+    var doubleValue: Double { get }
     // copied from FloatingPointType
     init(_ value: UInt8)
     init(_ value: Int8)
@@ -71,6 +72,7 @@ public protocol RealType {
 }
 // Double is default since floating-point literals are Double by default
 extension Double : RealType {
+    public var doubleValue: Double { return self }
     public var abs:Double { return Swift.abs(self) }
     public func cos()->Double { return Foundation.cos(self) }
     public func exp()->Double { return Foundation.exp(self) }
@@ -101,6 +103,7 @@ extension Double : RealType {
 }
 // But when explicitly typed you can use Float
 extension Float : RealType {
+    public var doubleValue: Double { return Double(self) }
     public var abs:Float { return Swift.abs(self) }
     public func cos()->Float { return Foundation.cos(self) }
     public func exp()->Float { return Foundation.exp(self) }
